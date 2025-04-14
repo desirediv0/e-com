@@ -1,0 +1,25 @@
+{
+  "name": "ecom-server",
+  "version": "1.0.0",
+  "description": "E-commerce backend API with Strapi and PostgreSQL",
+  "main": "index.js",
+  "scripts": {
+    "develop": "strapi develop",
+    "start": "strapi start",
+    "build": "strapi build",
+    "strapi": "strapi"
+  },
+  "dependencies": {
+    "@strapi/strapi": "^4.20.2",
+    "@strapi/plugin-users-permissions": "^4.20.2",
+    "@strapi/plugin-i18n": "^4.20.2",
+    "pg": "^8.11.3",
+    "pg-connection-string": "^2.6.2",
+    "uuid": "^9.0.1"
+  },
+  "engines": {
+    "node": ">=16.0.0 <=20.x.x",
+    "npm": ">=6.0.0"
+  },
+  "license": "MIT"
+}

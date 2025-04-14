@@ -1,0 +1,80 @@
+{
+  "kind": "collectionType",
+  "collectionName": "orders",
+  "info": {
+    "singularName": "order",
+    "pluralName": "orders",
+    "displayName": "Order",
+    "description": "Customer orders"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "orderItems": {
+      "type": "json",
+      "required": true
+    },
+    "shippingAddress": {
+      "type": "json",
+      "required": true
+    },
+    "paymentMethod": {
+      "type": "string",
+      "required": true
+    },
+    "paymentResult": {
+      "type": "json"
+    },
+    "itemsPrice": {
+      "type": "decimal",
+      "required": true
+    },
+    "shippingPrice": {
+      "type": "decimal",
+      "required": true
+    },
+    "taxPrice": {
+      "type": "decimal",
+      "required": true
+    },
+    "totalPrice": {
+      "type": "decimal",
+      "required": true
+    },
+    "isPaid": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "paidAt": {
+      "type": "datetime"
+    },
+    "isDelivered": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "deliveredAt": {
+      "type": "datetime"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": ["pending", "processing", "shipped", "delivered", "cancelled"],
+      "default": "pending",
+      "required": true
+    },
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "orders"
+    },
+    "orderNumber": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    }
+  }
+}
