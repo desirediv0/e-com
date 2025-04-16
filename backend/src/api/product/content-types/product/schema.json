@@ -1,0 +1,70 @@
+{
+  "kind": "collectionType",
+  "collectionName": "products",
+  "info": {
+    "singularName": "product",
+    "pluralName": "products",
+    "displayName": "Product",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "Title": {
+      "type": "string",
+      "required": true
+    },
+    "Description": {
+      "type": "blocks",
+      "required": true
+    },
+    "RegularPrice": {
+      "type": "integer"
+    },
+    "SalePrice": {
+      "type": "integer",
+      "required": true
+    },
+    "Slug": {
+      "type": "uid",
+      "targetField": "Title",
+      "required": true,
+      "minLength": 1
+    },
+    "Thumbnail": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "Gallery": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "MetaTitle": {
+      "type": "string",
+      "required": true
+    },
+    "MetaDescription": {
+      "type": "text",
+      "required": false
+    },
+    "size": {
+      "type": "json",
+      "required": true
+    },
+    "categories": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::category.category",
+      "mappedBy": "products"
+    }
+  }
+}

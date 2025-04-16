@@ -107,16 +107,20 @@ export const useCartAnimation = (): UseCartAnimationReturn => {
   const handleCheckout = useCallback(() => {
     setIsCheckingOut(true);
 
+    // Simulate checkout process
     setTimeout(() => {
       setIsCheckingOut(false);
       setIsOpen(false);
+      // Here you would normally redirect to checkout page or show success message
     }, 2000);
   }, [setIsOpen]);
 
+  // Handle item removal with animation
   const handleRemoveItem = useCallback(
     (id: number) => {
       setRemovingItemId(id);
 
+      // Wait for animation to complete
       setTimeout(() => {
         removeItem(id);
         setRemovingItemId(null);
@@ -125,6 +129,7 @@ export const useCartAnimation = (): UseCartAnimationReturn => {
     [removeItem]
   );
 
+  // Change empty cart message occasionally for better UX
   useEffect(() => {
     const interval = setInterval(() => {
       if (items?.length === 0) {

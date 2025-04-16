@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_shared_variants",
+  "info": {
+    "displayName": "Variant"
+  },
+  "options": {},
+  "attributes": {
+    "Size": {
+      "type": "enumeration",
+      "enum": [
+        "Kg1",
+        "Kg2.5",
+        "Kg5",
+        "Kg10"
+      ]
+    },
+    "Price": {
+      "type": "integer",
+      "required": true
+    },
+    "Stock": {
+      "type": "integer"
+    }
+  }
+}
