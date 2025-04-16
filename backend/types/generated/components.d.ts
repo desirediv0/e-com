@@ -62,6 +62,18 @@ export interface SharedSlider extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedVariant extends Struct.ComponentSchema {
+  collectionName: 'components_shared_variants';
+  info: {
+    displayName: 'Variant';
+  };
+  attributes: {
+    Price: Schema.Attribute.Integer & Schema.Attribute.Required;
+    Size: Schema.Attribute.Enumeration<['Kg1', 'Kg2.5', 'Kg5', 'Kg10']>;
+    Stock: Schema.Attribute.Integer;
+  };
+}
+
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
@@ -70,6 +82,7 @@ declare module '@strapi/strapi' {
       'shared.rich-text': SharedRichText;
       'shared.seo': SharedSeo;
       'shared.slider': SharedSlider;
+      'shared.variant': SharedVariant;
     }
   }
 }

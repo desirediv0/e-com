@@ -174,11 +174,10 @@ const ShoppingCart = memo(({ scrollState = false }: ShoppingCartProps) => {
           <Button
             variant="ghost"
             size="icon"
-            className={`relative h-9 w-9 rounded-full ${
-              !scrollState
-                ? "text-white hover:bg-white/20"
-                : "text-gray-700 hover:bg-gray-100"
-            }`}
+            className={`relative h-9 w-9 rounded-full ${!scrollState
+              ? "text-white hover:bg-white/20"
+              : "text-gray-700 hover:bg-gray-100"
+              }`}
             aria-label="Open shopping cart"
           >
             <CartIcon className="h-5 w-5" />
@@ -247,7 +246,7 @@ const ShoppingCart = memo(({ scrollState = false }: ShoppingCartProps) => {
           ) : (
             // Client-side rendering with animations
             <AnimatePresence initial={false}>
-              {items.length === 0 ? (
+              {!items?.length ? (
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -363,7 +362,7 @@ const ShoppingCart = memo(({ scrollState = false }: ShoppingCartProps) => {
           )}
         </div>
 
-        {items.length > 0 && hasMounted && (
+        {items?.length > 0 && hasMounted && (
           <div className="border-t border-gray-200">
             {/* Promo code section */}
             <div className="p-4 bg-gray-50">
@@ -381,13 +380,12 @@ const ShoppingCart = memo(({ scrollState = false }: ShoppingCartProps) => {
                       if (promoStatus !== "idle") setPromoStatus("idle");
                     }}
                     placeholder="Enter code"
-                    className={`pr-8 ${
-                      promoStatus === "valid"
-                        ? "border-green-500 focus-visible:ring-green-500"
-                        : promoStatus === "invalid"
+                    className={`pr-8 ${promoStatus === "valid"
+                      ? "border-green-500 focus-visible:ring-green-500"
+                      : promoStatus === "invalid"
                         ? "border-red-500 focus-visible:ring-red-500"
                         : ""
-                    }`}
+                      }`}
                     disabled={
                       promoStatus === "checking" || promoStatus === "valid"
                     }

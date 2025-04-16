@@ -40,16 +40,6 @@
         "images"
       ]
     },
-    "Size": {
-      "type": "enumeration",
-      "enum": [
-        "Kg 1",
-        "Kg 2.5",
-        "Kg 5",
-        "Kg 10"
-      ],
-      "required": true
-    },
     "Gallery": {
       "type": "media",
       "multiple": true,
@@ -65,6 +55,16 @@
     "MetaDescription": {
       "type": "text",
       "required": false
+    },
+    "size": {
+      "type": "json",
+      "required": true
+    },
+    "categories": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::category.category",
+      "mappedBy": "products"
     }
   }
 }
