@@ -1,0 +1,40 @@
+{
+  "kind": "collectionType",
+  "collectionName": "product_variations",
+  "info": {
+    "singularName": "product-variation",
+    "pluralName": "product-variations",
+    "displayName": "ProductVariation",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "flavour": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::flavour.flavour",
+      "inversedBy": "product_variation"
+    },
+    "weight": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::weight.weight",
+      "inversedBy": "product_variation"
+    },
+    "price": {
+      "type": "integer",
+      "required": true
+    },
+    "stock": {
+      "type": "integer"
+    },
+    "product": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::product.product",
+      "inversedBy": "product_variation"
+    }
+  }
+}
