@@ -500,6 +500,38 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiFlavourFlavour extends Struct.CollectionTypeSchema {
+  collectionName: 'flavours';
+  info: {
+    displayName: 'Flavour';
+    pluralName: 'flavours';
+    singularName: 'flavour';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::flavour.flavour'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String;
+    product_variation: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::product-variation.product-variation'
+    >;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
   collectionName: 'globals';
   info: {
@@ -558,6 +590,40 @@ export interface ApiOrderOrder extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiProductVariationProductVariation
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'product_variations';
+  info: {
+    description: '';
+    displayName: 'ProductVariation';
+    pluralName: 'product-variations';
+    singularName: 'product-variation';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    flavour: Schema.Attribute.Relation<'oneToOne', 'api::flavour.flavour'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::product-variation.product-variation'
+    > &
+      Schema.Attribute.Private;
+    price: Schema.Attribute.Integer & Schema.Attribute.Required;
+    product: Schema.Attribute.Relation<'oneToOne', 'api::product.product'>;
+    publishedAt: Schema.Attribute.DateTime;
+    stock: Schema.Attribute.Integer;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    weight: Schema.Attribute.Relation<'oneToOne', 'api::weight.weight'>;
+  };
+}
+
 export interface ApiProductProduct extends Struct.CollectionTypeSchema {
   collectionName: 'products';
   info: {
@@ -587,6 +653,10 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     MetaDescription: Schema.Attribute.Text;
     MetaTitle: Schema.Attribute.String & Schema.Attribute.Required;
+    product_variation: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::product-variation.product-variation'
+    >;
     publishedAt: Schema.Attribute.DateTime;
     RegularPrice: Schema.Attribute.Integer;
     SalePrice: Schema.Attribute.Integer & Schema.Attribute.Required;
@@ -598,6 +668,38 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
       }>;
     Thumbnail: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
     Title: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiWeightWeight extends Struct.CollectionTypeSchema {
+  collectionName: 'weights';
+  info: {
+    displayName: 'Weight';
+    pluralName: 'weights';
+    singularName: 'weight';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    label: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::weight.weight'
+    > &
+      Schema.Attribute.Private;
+    product_variation: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::product-variation.product-variation'
+    >;
+    publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1117,9 +1219,12 @@ declare module '@strapi/strapi' {
       'api::article.article': ApiArticleArticle;
       'api::author.author': ApiAuthorAuthor;
       'api::category.category': ApiCategoryCategory;
+      'api::flavour.flavour': ApiFlavourFlavour;
       'api::global.global': ApiGlobalGlobal;
       'api::order.order': ApiOrderOrder;
+      'api::product-variation.product-variation': ApiProductVariationProductVariation;
       'api::product.product': ApiProductProduct;
+      'api::weight.weight': ApiWeightWeight;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;
